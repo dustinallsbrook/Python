@@ -1,5 +1,6 @@
 import art
 import random
+import os
 RANDO_NUM = 0
   
 def main():
@@ -36,6 +37,7 @@ def play_time(attempts):
 
 def new_game():
   if input("Play again? 'y' or 'n': ") == 'y':
+    os.system('clear')
     main()
   else:
     exit()

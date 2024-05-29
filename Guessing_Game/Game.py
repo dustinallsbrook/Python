@@ -5,7 +5,6 @@ RANDO_NUM = 0
 def main():
   global RANDO_NUM
   RANDO_NUM = random.randint(1,100)
-  print(RANDO_NUM)
   print(art.logo)
   print("I'm thinking of a number between 1 and 100")
   difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")

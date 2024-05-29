@@ -1,0 +1,64 @@
+
+import art
+import math
+import random
+import time
+import os
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def main():
+  if input("Would you like to play a game of Black Jack? Type 'y' or 'n': ").lower() == "n":
+    print("Goodbye!")
+    exit()
+  os.system('clear')
+  print(art.logo)
+  deal_cards()
+
+def deal_cards():
+  users_hand = random.sample(cards,2)
+  dealers_hand = random.sample(cards,2)
+  users_score = sum(users_hand)
+  dealers_score = sum(dealers_hand)
+  users_choice = True
+  if users_score == 21:
+    dealer_deal(users_hand,users_score,dealers_hand,dealers_score)
+  while users_choice and users_score < 21:
+    if input(f"\tYour hand is {users_hand}. Your score is {users_score}.\n\tThe dealers first card is {dealers_hand[0]}.\nWould you like to hit? Type 'y' or 'n': ") == 'n':
+      break
+    users_hand += random.sample(cards,1)
+    users_score = sum(users_hand)
+    if users_score > 21:
+      calculation(users_hand,users_score,dealers_hand,dealers_score)
+  if users_score <= dealers_score:
+    calculation(users_hand,users_score,dealers_hand,dealers_score)
+  print(f"Your hand is: {users_hand}")
+  time.sleep(1)
+  dealer_deal(users_hand,users_score,dealers_hand,dealers_score)
+
+def dealer_deal(users_hand,users_score,dealers_hand,dealers_score):
+  while dealers_score <= 16:
+    print(f"The dealers hand is: {dealers_hand}, Their score is: {dealers_score}")
+    dealers_hand += random.sample(cards,1)
+    dealers_score = sum(dealers_hand)
+    time.sleep(2)
+  calculation(users_hand,users_score,dealers_hand,dealers_score)
+    
+def calculation(users_hand,users_score,dealers_hand,dealers_score):
+  # user wins
+  print(f"\nYour final hand:{users_hand}, final score: {users_score} ")
+  print(f"Dealer's final hand:{dealers_hand}, final score: {dealers_score} ")
+  if users_score > 21:
+    print(art.lose_art)
+  elif users_score <= 21 and users_score > dealers_score:
+    print(art.win_art)
+  # user wins if they have 21 or less and the dealer score is greater than 21
+  elif users_score <= 21 and dealers_score > 21:
+    print(art.win_art)
+  # user loses if they have less than 21 and their score is less than the dealers
+  elif users_score < 21 and users_score < dealers_score:
+    print(art.lose_art)
+  # draw condition users score is 21 or less and equal to the dealers
+  elif users_score <= 21 and users_score == dealers_score:
+    print(art.draw_art)
+  main()
+main()

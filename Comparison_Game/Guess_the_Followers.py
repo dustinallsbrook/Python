@@ -51,12 +51,11 @@ def game():
 def calcu(guess,celeb_list,celeb_a,celeb_b,win_scenario):
   #print(guess)
   if int(celeb_a['follower_count']) > int(celeb_b['follower_count']):
-    higher_celeb='A'.lower()
-    celeb_list[1] = randint(0,len(game_data.data)-1)
+    higher_celeb='a'
   else:
-    higher_celeb='B'.lower()
-    celeb_list[0] = celeb_list[1]
-    celeb_list[1] = randint(0,len(game_data.data)-1)
+    higher_celeb='b'
+  celeb_list[0] = celeb_list[1]
+  celeb_list[1] = randint(0,len(game_data.data)-1)
   #print(f"The higher celeb is {higher_celeb}")
   if guess == higher_celeb:
     return celeb_list
